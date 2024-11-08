@@ -57,13 +57,22 @@ function ToneComparisonApp() {
     }
   };
 
+  // Update schema markup
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Kind Prompting",
+    "description": "Transform your messages to discover the impact of kind communication.",
+    // ... rest of schema ...
+  };
+
   return (
     <div className="app-container">
       <div className="content-wrapper">
-        <h1 className="app-title">Does it pay off to be kind?</h1>
+        <h1 className="app-title">Kind Prompting</h1>
         <p className="subtitle">
-          Transform your message into different tones and see the impact of your words.
-          Experiment with kind and not-so-kind versions of the same message.
+          Discover how kindness transforms communication.
+          Compare kind and unkind versions of your message to see the difference.
         </p>
         
         <div className="input-container">

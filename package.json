@@ -25,5 +25,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "main": "/index.js"
+  "main": "/index.js",
+  "name": "kind-prompting",
+  "description": "AI-powered tool to explore kind communication",
+  "keywords": ["kind prompting", "kindness", "AI", "communication", "message transformer", "writing tool"]
 }
