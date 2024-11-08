@@ -1,6 +1,6 @@
 .app-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  background: #1a1a2e;
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -50,6 +50,25 @@
 }
 
 .input-field:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.3);
+}
+
+.input-field.auto-resize {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #fff;
+  transition: all 0.3s ease;
+  line-height: 1.5;
+  font-family: inherit;
+}
+
+.input-field.auto-resize:focus {
   outline: none;
   border-color: #4CAF50;
   box-shadow: 0 0 15px rgba(76, 175, 80, 0.3);

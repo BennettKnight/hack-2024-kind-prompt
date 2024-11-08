@@ -151,12 +151,26 @@
 }
 
 .responses-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 600px));
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
-  padding: 2rem;
+  padding: 1rem;
   width: 100%;
   max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .responses-container {
+    flex-direction: row;
+    gap: 3rem;
+    padding: 2rem;
+  }
+
+  .response-container {
+    flex: 1;
+    max-width: 600px;
+  }
 }
 
 @media (max-width: 768px) {

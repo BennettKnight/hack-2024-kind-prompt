@@ -5,8 +5,8 @@ import './reset.css';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-100 py-8">
-      <div className="container mx-auto px-4">
+    <div className="min-h-screen w-full" style={{ background: '#1a1a2e' }}>
+      <div className="container mx-auto">
         <ToneComparisonApp />
       </div>
     </div>

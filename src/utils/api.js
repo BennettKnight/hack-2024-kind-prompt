@@ -2,6 +2,7 @@
 import axios from 'axios';
 
 const API_URL = 'https://api.openai.com/v1/chat/completions';
+const API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
 
 // First, transform the user input into kind/rude prompts
 async function transformUserInput(originalPrompt, tone) {
@@ -35,7 +36,7 @@ async function transformUserInput(originalPrompt, tone) {
 
 // Then use the transformed prompts to get the final response
 export async function generateResponse(prompt, tone) {
-  if (!process.env.REACT_APP_OPENAI_API_KEY) {
+  if (!API_KEY) {
     throw new Error('OpenAI API key is not configured');
   }
 
