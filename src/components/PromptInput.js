@@ -1,13 +1,19 @@
 // components/PromptInput.js
 import React from 'react';
 
-const PromptInput = ({ prompt, setPrompt, onSubmit, loading }) => {
+const PromptInput = ({ prompt, setPrompt, onSubmit, loading, selectedModel, setSelectedModel }) => {
   const handleTextAreaChange = (e) => {
     setPrompt(e.target.value);
     // Auto-adjust height
     e.target.style.height = 'auto';
     e.target.style.height = e.target.scrollHeight + 'px';
   };
+
+  const models = [
+    { id: 'gpt-3.5', name: 'ChatGPT 3.5' },
+    { id: 'gpt-4', name: 'ChatGPT 4.0' },
+    { id: 'claude-3.5', name: 'Claude 3.5 Sonnet' }
+  ];
 
   return (
     <form onSubmit={onSubmit} className="prompt-form">
@@ -24,6 +30,20 @@ const PromptInput = ({ prompt, setPrompt, onSubmit, loading }) => {
           overflow: 'hidden'
         }}
       />
+      <div className="model-selector-container">
+        <select
+          value={selectedModel}
+          onChange={(e) => setSelectedModel(e.target.value)}
+          className="model-selector"
+          disabled={loading}
+        >
+          {models.map(model => (
+            <option key={model.id} value={model.id}>
+              {model.name}
+            </option>
+          ))}
+        </select>
+      </div>
       <button 
         type="submit" 
         className="generate-button"

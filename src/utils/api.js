@@ -1,11 +1,11 @@
 // utils/api.js
 import axios from 'axios';
 
-const API_URL = 'https://api.openai.com/v1/chat/completions';
-const API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
+const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
+const CLAUDE_API_URL = 'https://api.anthropic.com/v1/messages';
 
 // First, transform the user input into kind/rude prompts
-async function transformUserInput(originalPrompt, tone) {
+async function transformUserInput(originalPrompt, tone, model) {
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`
@@ -16,8 +16,8 @@ async function transformUserInput(originalPrompt, tone) {
     : "Convert this request into a rude, entitled, and aggressive way of asking: ";
 
   try {
-    const response = await axios.post(API_URL, {
-      model: "gpt-3.5-turbo",
+    const response = await axios.post(OPENAI_API_URL, {
+      model: model === 'claude-3.5' ? 'claude-3-sonnet-20240229' : model === 'gpt-4' ? 'gpt-4' : 'gpt-3.5-turbo',
       messages: [
         {
           role: "user",
@@ -35,36 +35,50 @@ async function transformUserInput(originalPrompt, tone) {
 }
 
 // Then use the transformed prompts to get the final response
-export async function generateResponse(prompt, tone) {
-  if (!API_KEY) {
-    throw new Error('OpenAI API key is not configured');
+export async function generateResponse(prompt, tone, model) {
+  if (!process.env.REACT_APP_OPENAI_API_KEY && !process.env.REACT_APP_ANTHROPIC_API_KEY) {
+    throw new Error('API key is not configured');
   }
 
-  const headers = {
+  const isClaudeModel = model.includes('claude');
+  const apiUrl = isClaudeModel ? CLAUDE_API_URL : OPENAI_API_URL;
+  
+  const headers = isClaudeModel ? {
+    'Content-Type': 'application/json',
+    'x-api-key': process.env.REACT_APP_ANTHROPIC_API_KEY,
+    'anthropic-version': '2023-06-01'
+  } : {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`
   };
 
   try {
-    // First, transform the user's input into a kind/rude prompt
-    const transformedPrompt = await transformUserInput(prompt, tone);
-    console.log('Transformed prompt:', { originalPrompt: prompt, transformedPrompt, tone });
-
-    // Then use that transformed prompt to get the response
-    const response = await axios.post(API_URL, {
-      model: "gpt-3.5-turbo",
-      messages: [
-        {
-          role: "user",
-          content: transformedPrompt
-        }
-      ],
+    const transformedPrompt = await transformUserInput(prompt, tone, model);
+    
+    // Different request body structure for Claude
+    const requestBody = isClaudeModel ? {
+      model: 'claude-3-sonnet-20240229',
+      max_tokens: 150,
+      messages: [{
+        role: 'user',
+        content: transformedPrompt
+      }]
+    } : {
+      model: model === 'gpt-4' ? 'gpt-4' : 'gpt-3.5-turbo',
+      messages: [{
+        role: 'user',
+        content: transformedPrompt
+      }],
       temperature: 0.7,
       max_tokens: 150
-    }, { headers });
+    };
 
-    const responseText = response.data.choices[0].message.content.trim();
-    console.log('Final Response:', { transformedPrompt, responseText, tone });
+    const response = await axios.post(apiUrl, requestBody, { headers });
+
+    // Handle different response structures
+    const responseText = isClaudeModel 
+      ? response.data.content[0].text
+      : response.data.choices[0].message.content.trim();
 
     return {
       transformedPrompt,

@@ -10,6 +10,7 @@ function ToneComparisonApp() {
   const [responses, setResponses] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [selectedModel, setSelectedModel] = useState('gpt-3.5');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,11 +25,9 @@ function ToneComparisonApp() {
 
     try {
       const [kindResponse, rudeResponse] = await Promise.all([
-        generateResponse(input, 'kind'),
-        generateResponse(input, 'rude')
+        generateResponse(input, 'kind', selectedModel),
+        generateResponse(input, 'rude', selectedModel)
       ]);
-
-      console.log('API Responses:', { kindResponse, rudeResponse });
 
       const formattedResponses = [
         {
@@ -49,7 +48,6 @@ function ToneComparisonApp() {
         }
       ];
 
-      console.log('Formatted Responses:', formattedResponses);
       setResponses(formattedResponses);
     } catch (error) {
       console.error('Error details:', error);
@@ -74,6 +72,8 @@ function ToneComparisonApp() {
             setPrompt={setInput}
             onSubmit={handleSubmit}
             loading={isLoading}
+            selectedModel={selectedModel}
+            setSelectedModel={setSelectedModel}
           />
         </div>
 

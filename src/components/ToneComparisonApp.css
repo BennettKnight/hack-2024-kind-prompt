@@ -12,11 +12,14 @@ y.app-container {
 
 .content-wrapper {
   width: 100%;
+  max-width: 1440px;
   display: flex;
   flex-direction: column;
   align-items: center;
   flex: 1;
   margin-bottom: 8rem;
+  margin: 0 auto;
+  padding-top: 80px;
 }
 
 .app-title {
@@ -111,7 +114,7 @@ y.app-container {
   gap: 2rem;
   margin-top: 3rem;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1440px;
   justify-content: center;
   margin-bottom: 8rem;
 }
@@ -213,4 +216,32 @@ y.app-container {
   .input-container {
     padding: 1.5rem;
   }
+}
+
+.model-selector-container {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.model-selector {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #fff;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.model-selector:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.3);
+}
+
+.model-selector option {
+  background: #1a1a2e;
+  color: #fff;
 } 
