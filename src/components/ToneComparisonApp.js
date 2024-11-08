@@ -61,34 +61,50 @@ function ToneComparisonApp() {
 
   return (
     <div className="app-container">
-      <h1 className="app-title">Does it pay off to be kind?</h1>
-      <p className="subtitle">
-        Transform your message into different tones and see the impact of your words.
-        Experiment with kind and not-so-kind versions of the same message.
-      </p>
-      
-      <div className="input-container">
-        <PromptInput
-          prompt={input}
-          setPrompt={setInput}
-          onSubmit={handleSubmit}
-          loading={isLoading}
-        />
+      <div className="content-wrapper">
+        <h1 className="app-title">Does it pay off to be kind?</h1>
+        <p className="subtitle">
+          Transform your message into different tones and see the impact of your words.
+          Experiment with kind and not-so-kind versions of the same message.
+        </p>
+        
+        <div className="input-container">
+          <PromptInput
+            prompt={input}
+            setPrompt={setInput}
+            onSubmit={handleSubmit}
+            loading={isLoading}
+          />
+        </div>
+
+        {error && (
+          <div className="error-message">
+            {error}
+          </div>
+        )}
+        
+        <div className="responses-container">
+          {responses.length > 0 && responses.map((response, index) => (
+            <div key={index} className="response-column">
+              <ResponseSection {...response} />
+            </div>
+          ))}
+        </div>
       </div>
 
-      {error && (
-        <div className="error-message">
-          {error}
-        </div>
-      )}
-      
-      <div className="responses-container">
-        {responses.length > 0 && responses.map((response, index) => (
-          <div key={index} className="response-column">
-            <ResponseSection {...response} />
-          </div>
-        ))}
-      </div>
+      <a 
+        href="https://ae.studio/" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="footer"
+      >
+        <p className="footer-text">Made with kindness by</p>
+        <img 
+          src="/assets/logos/ae-studio.svg" 
+          alt="AE.STUDIO" 
+          className="footer-logo"
+        />
+      </a>
     </div>
   );
 }
