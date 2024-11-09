@@ -24,8 +24,7 @@ async function transformUserInput(originalPrompt, tone, model) {
           content: `${promptForTransformation}${originalPrompt}`
         }
       ],
-      temperature: 0.7,
-      max_tokens: 150
+      temperature: 0.7
     }, { headers });
 
     return response.data.choices[0].message.content.trim();
@@ -72,8 +71,7 @@ export async function generateResponse(prompt, tone, model) {
         role: 'user',
         content: transformedPrompt
       }],
-      temperature: 0.7,
-      max_tokens: 150
+      temperature: 0.7
     };
 
     const response = await axios.post(apiUrl, requestBody, axiosConfig);
