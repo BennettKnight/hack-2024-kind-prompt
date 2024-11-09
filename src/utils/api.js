@@ -43,19 +43,22 @@ export async function generateResponse(prompt, tone, model) {
   const isClaudeModel = model.includes('claude');
   const apiUrl = isClaudeModel ? CLAUDE_API_URL : OPENAI_API_URL;
   
-  const headers = isClaudeModel ? {
-    'Content-Type': 'application/json',
-    'x-api-key': process.env.REACT_APP_ANTHROPIC_API_KEY,
-    'anthropic-version': '2023-06-01'
-  } : {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`
-  };
-
   try {
+    // Add timeout for Mobile Safari
+    const axiosConfig = {
+      headers: isClaudeModel ? {
+        'Content-Type': 'application/json',
+        'x-api-key': process.env.REACT_APP_ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01'
+      } : {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`
+      },
+      timeout: 30000, // 30 second timeout
+    };
+
     const transformedPrompt = await transformUserInput(prompt, tone, model);
     
-    // Different request body structure for Claude
     const requestBody = isClaudeModel ? {
       model: 'claude-3-sonnet-20240229',
       max_tokens: 150,
@@ -73,21 +76,34 @@ export async function generateResponse(prompt, tone, model) {
       max_tokens: 150
     };
 
-    const response = await axios.post(apiUrl, requestBody, { headers });
-
-    // Handle different response structures
-    const responseText = isClaudeModel 
-      ? response.data.content[0].text
-      : response.data.choices[0].message.content.trim();
+    const response = await axios.post(apiUrl, requestBody, axiosConfig);
 
     return {
       transformedPrompt,
-      responseText,
+      responseText: isClaudeModel ? response.data.content[0].text : response.data.choices[0].message.content.trim(),
       type: tone
     };
   } catch (error) {
-    console.error('API Error:', error);
-    throw new Error(`Failed to generate response: ${error.message}`);
+    // Enhanced error logging for Mobile Safari
+    console.error('API Error Details:', {
+      message: error.message,
+      stack: error.stack,
+      response: error.response?.data,
+      status: error.response?.status,
+      headers: error.response?.headers,
+      userAgent: window.navigator.userAgent
+    });
+
+    // Specific error messages for common Mobile Safari issues
+    if (error.code === 'ECONNABORTED') {
+      throw new Error('Request timed out. Please check your connection and try again.');
+    }
+    
+    if (error.response?.status === 403) {
+      throw new Error('Access denied. Please check your API credentials.');
+    }
+
+    throw new Error(`Request failed: ${error.message}`);
   }
 }
 
