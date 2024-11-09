@@ -114,12 +114,7 @@ function ToneComparisonApp() {
         rel="noopener noreferrer" 
         className="footer"
       >
-        <p className="footer-text">Made with kindness by</p>
-        <img 
-          src="/assets/logos/ae-studio.svg" 
-          alt="AE.STUDIO" 
-          className="footer-logo"
-        />
+        <p className="footer-text">Made with ❤️ by AE Studio</p>
       </a>
     </div>
   );

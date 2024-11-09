@@ -120,27 +120,15 @@ y.app-container {
 }
 
 .footer {
-  position: fixed;
-  bottom: 3rem;
-  left: 50%;
-  transform: translateX(-50%);
   padding: 1.5rem 3rem;
   text-align: center;
   background: rgba(35, 33, 33, 0.675);
   border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
   text-decoration: none;
   transition: all 0.2s ease;
   cursor: pointer;
-  z-index: 10;
-}
-
-.footer:hover {
-  background: rgba(255, 255, 255, 0.06);
-  transform: translateX(-50%) translateY(-2px);
+  width: fit-content;
+  margin: 4rem auto 2rem auto;
 }
 
 .footer-text {
@@ -149,9 +137,13 @@ y.app-container {
   font-weight: 400;
 }
 
-.footer-logo {
-  width: 100px;
-  height: auto;
+@media screen and (max-width: 768px) {
+  .footer {
+    position: relative;
+    margin-top: auto;
+    width: 100%;
+    border-radius: 0;
+  }
 }
 
 /* Animations */
@@ -263,5 +255,21 @@ y.app-container {
     width: 72px;
     height: 72px;
     padding: 8px;
+  }
+}
+
+/* Add mobile-specific styles */
+@media screen and (max-width: 768px) {
+  .footer {
+    position: relative;
+    margin-top: auto;
+    width: 100%;
+    border-radius: 0;
+  }
+  
+  .content-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 } 
