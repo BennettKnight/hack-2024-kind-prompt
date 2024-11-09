@@ -69,6 +69,13 @@ function ToneComparisonApp() {
   return (
     <div className="app-container">
       <div className="content-wrapper">
+        <img 
+          src={process.env.PUBLIC_URL + '/assets/logos/kind-prompting-logo.png'}
+          alt="Kind Prompting Logo"
+          className="app-logo"
+          width="92"
+          height="92"
+        />
         <h1 className="app-title">Kind Prompting</h1>
         <p className="subtitle">
           Discover how kindness transforms communication.
