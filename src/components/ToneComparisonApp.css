@@ -35,13 +35,24 @@ y.app-container {
 }
 
 .subtitle {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: #a0a0a0;
   text-align: center;
   max-width: 800px;
   animation: fadeIn 1s ease-out 0.3s both;
   margin: 0 auto 3rem auto;
   line-height: 1.5;
+}
+
+.subtitle a {
+  color: #4CAF50;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.subtitle a:hover {
+  color: #2196F3;
+  text-decoration: underline;
 }
 
 .input-container {
