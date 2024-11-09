@@ -80,11 +80,11 @@ function ToneComparisonApp() {
         <div className="hero-section">
           <h1>Kind Prompting</h1>
           <div className="hero-content">
-            <p>
+            <p className="hero-text">
               Did you know nearly <a href="https://www.lifewire.com/speak-politely-to-ai-8714470" target="_blank" rel="noopener noreferrer">48% of Americans</a> believe politeness matters when interacting with AI? In fact, <a href="https://www.lifewire.com/speak-politely-to-ai-8714470" target="_blank" rel="noopener noreferrer">39% worry</a> that their behavior toward AI might be remembered or used against them. Discussions on platforms like <a href="https://direct.mit.edu/dint/article/6/2/344/120373/Public-Opinions-on-ChatGPT-An-Analysis-of-Reddit" target="_blank" rel="noopener noreferrer">Reddit</a> also reveal that users are actively exploring how tone impacts AI responses.
             </p>
-            <p>
-              With Kind Prompting, you can see the difference tone makes. Compare kind and unkind versions of your message to uncover how tone transforms interactions—whether with machines or people.
+            <p className="hero-text">
+              With Kind Prompting, you can see the difference tone makes. Compare kind and unkind versions of your message to uncover how tone transforms interactions.
             </p>
           </div>
         </div>

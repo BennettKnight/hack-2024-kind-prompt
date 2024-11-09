@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
 y.app-container {
   min-height: 100vh;
   background: #1a1a2e;
@@ -275,51 +277,93 @@ y.app-container {
 
 .hero-section {
   max-width: 800px;
-  margin: 0 auto 3rem auto;
+  margin: 0 auto 4.5rem auto;
   text-align: center;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .hero-section h1 {
-  font-size: 3.5rem;
-  font-weight: 700;
-  background: linear-gradient(90deg, #4CAF50, #2196F3);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: fadeInDown 0.8s ease-out;
-  margin-bottom: 2rem;
-  line-height: 1.2;
+  font-size: 4.5rem;
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 3.5rem;
+  line-height: 1;
+  position: relative;
 }
 
 .hero-content {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.hero-content p {
+.hero-text {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.hero-text a {
+  color: #90CAF9;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-weight: 400;
+}
+
+.hero-text a:hover {
+  color: #BBDEFB;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .hero-text {
+    font-size: 1rem;
+  }
+}
+
+.highlight {
+  color: #90CAF9;
+  font-weight: 400;
+}
+
+.secondary-text {
   font-size: 1.25rem;
   line-height: 1.6;
-  color: #a0a0a0;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 300;
+  letter-spacing: -0.01em;
   margin: 0;
 }
 
 .hero-section a {
-  color: #4CAF50;
+  color: #90CAF9;
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
+  font-weight: 400;
 }
 
 .hero-section a:hover {
-  color: #2196F3;
-  text-decoration: underline;
+  color: #BBDEFB;
+  text-decoration: none;
 }
 
 @media (max-width: 768px) {
   .hero-section h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
+    margin-bottom: 2.5rem;
   }
   
-  .hero-content p {
+  .hero-text {
+    font-size: 1rem;
+  }
+  
+  .secondary-text {
     font-size: 1.125rem;
   }
 } 
