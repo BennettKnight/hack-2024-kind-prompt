@@ -11,8 +11,7 @@ const PromptInput = ({ prompt, setPrompt, onSubmit, loading, selectedModel, setS
 
   const models = [
     { id: 'gpt-3.5', name: 'ChatGPT 3.5' },
-    { id: 'gpt-4', name: 'ChatGPT 4.0' },
-    { id: 'claude-3.5', name: 'Claude 3.5 Sonnet' }
+    { id: 'gpt-4', name: 'ChatGPT 4.0' }
   ];
 
   return (
